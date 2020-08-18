@@ -31,7 +31,7 @@ public class BackServletFilter implements Filter {
         if (uri.startsWith("/admin")) {
             String servletPath = StringUtils.substringBetween(uri, "_", "_")+"Servlet";
             String method = StringUtils.substringAfterLast(uri, "_");
-            request.setAttribute("methdo",method);
+            request.setAttribute("method",method);
             request.getRequestDispatcher("/"+servletPath).forward(request,response);
             return;
         }

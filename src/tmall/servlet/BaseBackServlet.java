@@ -43,15 +43,24 @@ public abstract class BaseBackServlet extends HttpServlet {
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // 获取分页信息
         int start = 0;
-        int count = 0;
-        start = Integer.parseInt(req.getParameter("start"));
-        count = Integer.parseInt(req.getParameter("count"));
-        Page page = new Page(start, count);
+        int count = 5;
 
-        //借助反射调用相应方法
-        String method = req.getParameter("method");
         try {
-            Method m = this.getClass().getMethod(method, HttpServletRequest.class, HttpServletResponse.class, Page.class);
+            try {
+                start = Integer.parseInt(req.getParameter("page.start"));
+            } catch (Exception e) {
+
+            }
+            try {
+                count = Integer.parseInt(req.getParameter("page.count"));
+            } catch (Exception e) {
+
+            }
+            Page page = new Page(start, count);
+
+            //借助反射调用相应方法
+            String method = (String) req.getAttribute("method");
+            Method m = this.getClass().getMethod(method, javax.servlet.http.HttpServletRequest.class, javax.servlet.http.HttpServletResponse.class, Page.class);
             String redirect = m.invoke(this, req, resp, page).toString();
 
             if (redirect.startsWith("@")) {
