@@ -88,7 +88,7 @@ public abstract class BaseBackServlet extends HttpServlet {
 
             List items = upload.parseRequest(request);
             Iterator iterator = items.iterator();
-            if (iterator.hasNext()) {
+            while (iterator.hasNext()) {
                 FileItem item = (FileItem) iterator.next();
                 if (!item.isFormField()) {
                     is = item.getInputStream();

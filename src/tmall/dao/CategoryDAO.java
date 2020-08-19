@@ -25,7 +25,7 @@ public class CategoryDAO {
         return total;
     }
     public void add(Category category) {
-        String sql = "insert into category values(null,?,?)";
+        String sql = "insert into category values(null,?)";
         try(final Connection connection = DBUtil.getConnection(); final PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setString(1,category.getName());
             ps.execute();
