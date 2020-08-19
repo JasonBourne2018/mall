@@ -34,8 +34,6 @@ public class CategoryServlet extends BaseBackServlet {
         File file = new File(imageFolder,c.getId()+".jpg");
 
         try {
-            System.out.println(is);
-            System.out.println(is.available());
             if(null!=is && 0!=is.available()){
                 try(FileOutputStream fos = new FileOutputStream(file)){
                     byte b[] = new byte[1024 * 1024];
@@ -43,7 +41,6 @@ public class CategoryServlet extends BaseBackServlet {
                     while (-1 != (length = is.read(b))) {
                         fos.write(b, 0, length);
                     }
-                    System.out.println(length);
                     fos.flush();
                     //通过如下代码，把文件保存为jpg格式
                     BufferedImage img = ImageUtil.change2jpg(file);
