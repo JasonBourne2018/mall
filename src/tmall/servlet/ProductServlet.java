@@ -23,7 +23,7 @@ public class ProductServlet extends BaseBackServlet{
         float originalPrice = Float.parseFloat(request.getParameter("originalPrice"));
         float promotePrice = Float.parseFloat(request.getParameter("promotePrice"));
         String subTitle = request.getParameter("subTitle");
-        Integer stock = Integer.getInteger(request.getParameter("stock"));
+        Integer stock = Integer.parseInt(request.getParameter("stock"));
 
         Product product = new Product();
         product.setName(name);
@@ -34,7 +34,7 @@ public class ProductServlet extends BaseBackServlet{
         product.setStock(stock);
         product.setCreateDate(new Date());
         productDAO.add(product);
-        return "@admin_product_list?cid="+product.getCategory().getId();
+        return "@admin_product_list?cid="+cid;
     }
 
     @Override
